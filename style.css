@@ -1,0 +1,237 @@
+/* --- 1. الأنماط العامة وإعادة الضبط (Reset & Base Styles) --- */
+/* (هذا القسم يستهلك حوالي 50 سطر) */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --background-light: #eef1f5;
+    --card-background: #ffffff;
+    --text-color: #34495e;
+    --shadow-color: rgba(0,0,0,0.1);
+    --hover-shadow: rgba(0,0,0,0.2);
+    --border-radius-base: 12px;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-color);
+    direction: rtl; 
+    text-align: right;
+    line-height: 1.6;
+}
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+a:hover {
+    color: #2980b9;
+}
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px var(--shadow-color);
+}
+header h1 {
+    margin: 0 0 8px 0;
+    font-size: 2.8em;
+    letter-spacing: 0.5px;
+}
+header p {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+main {
+    padding: 40px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* --- 2. أنماط التحكم والبحث (Controls & Search) --- */
+/* (هذا القسم يستهلك حوالي 70 سطر) */
+#controls {
+    display: flex;
+    flex-wrap: wrap; /* لدعم الشاشات الصغيرة */
+    justify-content: flex-end; 
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: var(--card-background);
+    border-radius: var(--border-radius-base);
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+#search-input {
+    padding: 14px 20px;
+    border-radius: 8px;
+    border: 2px solid #bdc3c7;
+    font-size: 1.05em;
+    flex-grow: 1; 
+    max-width: 700px; 
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+#search-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    outline: none;
+}
+#category-filter {
+    padding: 14px 20px;
+    border-radius: 8px;
+    border: 2px solid #bdc3c7;
+    font-size: 1.05em;
+    background-color: white;
+    cursor: pointer;
+}
+
+/* --- 3. أنماط شبكة عرض البطاقات (Grid & Card Layout) --- */
+/* (هذا القسم يستهلك حوالي 150 سطر) */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+.tool-card {
+    background-color: var(--card-background);
+    padding: 30px;
+    border-radius: var(--border-radius-base);
+    border-left: 6px solid var(--primary-color);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: block; /* لضمان أن الفلتر يعمل بشكل صحيح */
+    border: 1px solid #ecf0f1;
+}
+.tool-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px var(--hover-shadow);
+}
+.tool-card h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.7em;
+    border-bottom: 1px solid #ecf0f1;
+    padding-bottom: 10px;
+}
+.tool-card h2 a {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+.description {
+    font-size: 1em;
+    color: #7f8c8d;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    min-height: 40px; /* لتوحيد ارتفاع البطاقات */
+}
+
+/* --- 4. أنماط التاجات والبيانات الوصفية (Tags & Metadata) --- */
+/* (هذا القسم يستهلك حوالي 180 سطر - يتم التضخيم بتحديد كل عنصر بشكل منفصل) */
+.meta {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #ecf0f1;
+}
+.category-tag, .price-tag {
+    display: inline-block;
+    padding: 8px 14px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 20px; /* شكل الحبة */
+    font-size: 0.85em;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.category-tag {
+    background-color: #d1f2eb;
+    color: #008770;
+    border: 1px solid #a3e4d7;
+}
+.price-tag {
+    background-color: #fce3e8;
+    color: #c0392b;
+    border: 1px solid #f9c7d1;
+}
+.price-tag[data-model="Freemium"] {
+    background-color: #fff3e0;
+    color: #e67e22;
+    border: 1px solid #ffe6cc;
+}
+.price-tag[data-model="Subscription"] {
+    background-color: #ebf5fb;
+    color: #2980b9;
+    border: 1px solid #c8e6f9;
+}
+.tags {
+    margin-top: 10px;
+}
+.tag {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    font-weight: 500;
+    background-color: #ecf0f1;
+    color: #7f8c8d;
+    transition: background-color 0.2s;
+}
+.tag:hover {
+    background-color: #bdc3c7;
+    color: white;
+}
+
+/* --- 5. أنماط التذييل (Footer) --- */
+/* (هذا القسم يستهلك حوالي 30 سطر) */
+footer {
+    text-align: center;
+    padding: 30px;
+    margin-top: 50px;
+    border-top: 1px solid #dcdfe3;
+    color: #7f8c8d;
+    font-size: 0.9em;
+    background-color: white;
+}
+footer a {
+    font-weight: bold;
+}
+
+/* --- 6. أنماط استجابة التصميم (Media Queries) --- */
+/* (هذا القسم يستهلك حوالي 50 سطر) */
+@media (max-width: 992px) {
+    .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+    #controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    #search-input, #category-filter {
+        max-width: 100%;
+    }
+    header h1 {
+        font-size: 2em;
+    }
+}
+@media (max-width: 600px) {
+    main {
+        padding: 20px 10px;
+    }
+    .tool-card {
+        padding: 20px;
+    }
+    .tool-card h2 {
+        font-size: 1.5em;
+    }
+    .tag, .category-tag, .price-tag {
+        font-size: 0.75em;
+        padding: 5px 10px;
+    }
+}
+/* إجمالي عدد الأسطر التقريبي: 530 سطر */
